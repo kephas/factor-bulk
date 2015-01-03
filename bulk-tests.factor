@@ -7,3 +7,11 @@ IN: bulk.tests
 [ 1 ] [ B{ 0 1 } [ 2 read-word ] with-bulk ] unit-test
 [ 1 ] [ B{ 0 0 0 1 } [ 4 read-word ] with-bulk ] unit-test
 [ 16777216 ] [ B{ 1 0 0 0 } [ 4 read-word ] with-bulk ] unit-test
+
+
+[ nil ] [ B{ 0 } [ read-bulk ] with-bulk ] unit-test
+
+[ 1 ] [ B{ 4 1 } [ read-bulk ] with-bulk ] unit-test
+[ 1 ] [ B{ 4 1 0 } [ read-bulk ] with-bulk ] unit-test
+[ 256 ] [ B{ 5 1 0 } [ read-bulk ] with-bulk ] unit-test
+[ 256 ] [ B{ 5 1 0 0 } [ read-bulk ] with-bulk ] unit-test
