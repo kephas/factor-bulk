@@ -1,4 +1,4 @@
-USING: tools.test kernel bulk io.encodings.binary io.streams.byte-array ;
+USING: tools.test kernel bulk bulk.private io.encodings.binary io.streams.byte-array ;
 IN: bulk.tests
 
 : with-bulk ( bytes quot -- ) binary swap with-byte-reader ; inline
