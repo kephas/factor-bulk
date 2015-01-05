@@ -1,4 +1,4 @@
-USING: kernel combinators io io.binary ;
+USING: kernel math combinators io io.binary ;
 IN: bulk
 
 SYMBOLS: nil ;
@@ -14,6 +14,11 @@ DEFER: read-form-payload ! ( -- seq )
 DEFER: read-array-payload ! ( -- array )
 
 : read-word ( size -- word ) read be> ;
+
+: msb ( size -- int ) 1 swap 8 * 1 - shift ;
+
+: parse-2c-notation ( value size -- int )
+    msb [ 1 - bitand ] [ bitand ] 2bi - ;
 
 DEFER: read-signed-payload ! ( -- sint )
 
