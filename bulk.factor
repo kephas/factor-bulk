@@ -7,7 +7,7 @@ ERROR: parsing-error ;
 
 <PRIVATE
 
-SYMBOLS: eob ; ! end-of-bulk
+SYMBOLS: end ; ! end of sequence
 
 DEFER: read-form-payload ! ( -- seq )
 
@@ -23,7 +23,7 @@ DEFER: read-ref-payload ! ( marker -- ref )
     read1 dup
     { { 0 [ 2drop nil ] }
       { 1 [ 2drop read-form-payload ] }
-      { 2 [ drop [ eob ] [ parsing-error ] if ] }
+      { 2 [ drop [ end ] [ parsing-error ] if ] }
       { 3 [ 2drop read-array-payload ] }
       { 4 [ 2drop 1 read-word ] }
       { 5 [ 2drop 2 read-word ] }
