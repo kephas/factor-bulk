@@ -1,9 +1,11 @@
-USING: kernel math combinators io io.binary ;
+USING: arrays combinators io io.binary kernel math sequences ;
 IN: bulk
 
 SYMBOLS: nil nosize ;
 
 ERROR: parsing-error ;
+
+DEFER: read-bulk
 
 <PRIVATE
 
@@ -11,7 +13,9 @@ SYMBOLS: end ; ! end of sequence
 
 DEFER: read-form-payload ! ( -- seq )
 
-DEFER: read-array-payload ! ( -- array )
+: read-array-payload ( -- array )
+    read-bulk 0 <array> dup
+    [ swap drop read1 swap pick set-nth ] each-index ;
 
 : read-word ( size -- word ) read be> ;
 
