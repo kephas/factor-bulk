@@ -11,7 +11,11 @@ DEFER: read-bulk
 
 SYMBOLS: end ; ! end of sequence
 
-DEFER: read-form-payload ! ( -- seq )
+: (read-form-payload) ( seq -- seq )
+    read-bulk dup end eq? [ drop ] [ suffix (read-form-payload) ] if ;
+
+: read-form-payload ( -- seq )
+    { } (read-form-payload) ;
 
 : read-array-payload ( -- array )
     read-bulk 0 <array> dup
@@ -32,7 +36,7 @@ DEFER: read-ref-payload ! ( marker -- ref )
     read1 dup
     { { 0 [ 2drop nil nosize ] }
       { 1 [ 2drop read-form-payload nosize ] }
-      { 2 [ drop [ end ] [ parsing-error ] if nosize ] }
+      { 2 [ drop [ parsing-error ] [ end ] if nosize ] }
       { 3 [ 2drop read-array-payload nosize ] }
       { 4 [ 2drop 1 read-word 1 ] }
       { 5 [ 2drop 2 read-word 2 ] }

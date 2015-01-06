@@ -16,6 +16,11 @@ IN: bulk.tests
 
 [ nil ] [ B{ 0 } bin-read-bulk ] unit-test
 
+[ { } ] [ B{ 1 2 } bin-read-bulk ] unit-test
+[ { nil } ] [ B{ 1 0 2 } bin-read-bulk ] unit-test
+[ { { } } ] [ B{ 1 1 2 2 } bin-read-bulk ] unit-test
+[ { { } { } } ] [ B{ 1 1 2 1 2 2 } bin-read-bulk ] unit-test
+
 [ { } ] [ B{ 3 4 0 } bin-read-bulk ] unit-test
 [ { 11 22 } ] [ B{ 3 4 2 11 22 } bin-read-bulk ] unit-test
 
