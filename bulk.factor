@@ -30,7 +30,12 @@ DEFER: (read-bulk)
 
 : read-signed-payload ( -- sint ) f (read-bulk) parse-2c-notation ;
 
-DEFER: read-ref-payload ! ( marker -- ref )
+: (read-ns) ( marker -- ns )
+    dup 255 = [ [ read1 dup 255 = [ + t ] [ + f ] if ] loop ] [ ] if ;
+
+TUPLE: ref ns name ;
+
+: read-ref-payload ( marker -- ref ) (read-ns) read1 ref boa ;
 
 : (read-bulk) ( top? -- obj size )
     read1 dup
@@ -50,7 +55,7 @@ DEFER: read-ref-payload ! ( marker -- ref )
       { 13 [ parsing-error ] }
       { 14 [ parsing-error ] }
       { 15 [ parsing-error ] }
-      [ drop read-ref-payload nosize ]
+      [ drop nip read-ref-payload nosize ]
     } case ;
 
 PRIVATE>
