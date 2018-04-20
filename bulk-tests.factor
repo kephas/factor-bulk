@@ -29,10 +29,10 @@ IN: bulk.tests
 [ 256 ] [ B{ 5 1 0 } bin-read-bulk ] unit-test
 [ 256 ] [ B{ 5 1 0 0 } bin-read-bulk ] unit-test
 
-[ 1 ] [ B{ 9 4 1 } bin-read-bulk ] unit-test
-[ 127 ] [ B{ 9 4 127 } bin-read-bulk ] unit-test
-[ -2 ] [ B{ 9 4 254 } bin-read-bulk ] unit-test
-[ -128 ] [ B{ 9 4 128 } bin-read-bulk ] unit-test
-[ -127 ] [ B{ 9 4 129 } bin-read-bulk ] unit-test
-[ -127 ] [ B{ 9 5 255 129 } bin-read-bulk ] unit-test
-[ -127 ] [ B{ 9 6 255 255 255 129 } bin-read-bulk ] unit-test
+[ 1 ] [ B{ 9 1 } bin-read-bulk ] unit-test
+[ 127 ] [ B{ 9 127 } bin-read-bulk ] unit-test
+[ -2 ] [ B{ 9 254 } bin-read-bulk ] unit-test
+[ -128 ] [ B{ 9 128 } bin-read-bulk ] unit-test
+[ -127 ] [ B{ 9 129 } bin-read-bulk ] unit-test
+[ -127 ] [ B{ 10 255 129 } bin-read-bulk ] unit-test
+[ -127 ] [ B{ 11 255 255 255 129 } bin-read-bulk ] unit-test

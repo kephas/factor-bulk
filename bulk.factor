@@ -26,9 +26,8 @@ SYMBOLS: end ; ! end of sequence
 : msb ( size -- int ) 1 swap 8 * 1 - shift ;
 : parse-2c-notation ( value size -- int )
     msb [ 1 - bitand ] [ bitand ] 2bi - ;
-DEFER: (read-bulk)
 
-: read-signed-payload ( -- sint ) f (read-bulk) parse-2c-notation ;
+: read-signed-word ( size -- sint ) dup [ read-word ] dip  parse-2c-notation ;
 
 : (read-ns) ( marker -- ns )
     dup 255 = [ [ read1 dup 255 = [ + t ] [ + f ] if ] loop ] [ ] if ;
@@ -39,6 +38,7 @@ TUPLE: ref ns name ;
 
 : (read-bulk) ( top? -- obj size )
     read1 dup
+    dup [ 14 >= ] [ 31 <= ] bi and [ parsing-error ] [ ] if
     { { 0 [ 2drop nil nosize ] }
       { 1 [ 2drop read-form-payload nosize ] }
       { 2 [ drop [ parsing-error ] [ end ] if nosize ] }
@@ -48,13 +48,11 @@ TUPLE: ref ns name ;
       { 6 [ 2drop 4 read-word 4 ] }
       { 7 [ 2drop 8 read-word 8 ] }
       { 8 [ 2drop 16 read-word 16 ] }
-      { 9 [ 2drop read-signed-payload nosize ] }
-      { 10 [ parsing-error ] }
-      { 11 [ parsing-error ] }
-      { 12 [ parsing-error ] }
-      { 13 [ parsing-error ] }
-      { 14 [ parsing-error ] }
-      { 15 [ parsing-error ] }
+      { 9 [ 2drop 1 read-signed-word 1 ] }
+      { 10 [ 2drop 2 read-signed-word 2 ] }
+      { 11 [ 2drop 4 read-signed-word 4 ] }
+      { 12 [ 2drop 8 read-signed-word 8 ] }
+      { 13 [ 2drop 16 read-signed-word 16 ] }
       [ drop nip read-ref-payload nosize ]
     } case ;
 
