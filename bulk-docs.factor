@@ -2,7 +2,9 @@ USING: help.markup help.syntax ;
 IN: bulk
 
 ARTICLE: "BULK" "Binary Uniform Language Kit"
-"BULK is a framework to create unambiguous and extensible binary formats without the use of a single central registry." $nl "Reading is being implemented…" ;
+"BULK is a framework to create unambiguous and extensible binary formats without the use of a single central registry." $nl
+"Basic reading is implemented." $nl
+{ $vocab-link "bulk" } ;
 
 ABOUT: "BULK"
 
